@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="stylesheet" href="toDoListCss.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+<title>My To Do List App</title>
+<body>
+<script src="myApp.js"></script>
+<div ng-app="module" ng-controller="myAppController";">
+  <header>
+    <titleBody>My To Do List</titleBody>
+  </header>
+    <div>
+      <div>
+        <input placeholder="add value to list" ng-model="task">
+		<button ng-click="addValue()">Add task</button>
+      </div>
+  </div>  
+
+  <div ng-hide="values.length == 0" > My To Do List</div>
+  <table ng-hide="values.length == 0" class= "tableCss">
+	<tr ng-repeat="value in values track by $index" >
+		<td>{{$index + 1 }}</td>
+		<td ng-click="removeTask($index)">{{value}}</td>
+		<td>			
+			<button ng-hide="!isEditTask()" ng-click="disabledEditTask()">			
+				<img class="buttonInTableCss" src="imgEdit.png">
+			</button>
+			<input ng-hide="isEditTask()" value="{{value}}"></input>
+			<button ng-hide="isEditTask()" ng-click="EditTask($index , {{value}})">save</button>
+			<button ng-hide="isEditTask()" ng-click="enabledEditTask()">cancel</button>			
+		</td>
+	</tr>
+  </table>
+  <errorLog class= "messageErrorCss" >{{logError}}</errorLog>
+  
+
+</div>
+
+</body>
+</html>
